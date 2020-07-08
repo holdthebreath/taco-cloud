@@ -2,6 +2,8 @@ package tacos;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @ClassName Order
  * @Description 订单领域类
@@ -11,6 +13,7 @@ import lombok.Data;
  */
 @Data
 public class Order {
+    @NotBlank(message = "Name is required")
     private String name;
     private String street;
     private String city;
