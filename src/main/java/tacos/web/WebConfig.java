@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     //接收一个ViewControllerRegistry对象,使用它注册一个或多个视图控制器
     @Override
-    public void addViewControllers(ViewControllerRegistry registry){
+    public void addViewControllers(ViewControllerRegistry registry) {
         //addViewController():针对传递进去的路径执行GET请求,方法返回一个ViewControllerRegistration对象
         //ViewControllerRegistration调用setViewName()方法,转发到"home"视图上
         registry.addViewController("/").setViewName("home");
