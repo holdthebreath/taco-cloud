@@ -3,12 +3,15 @@ package tacos.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.Ingredient;
 import tacos.Taco;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +59,12 @@ public class DesignTacoController {
 
     //处理POST请求
     @PostMapping
-    public String processDesign(Taco design) {
+    //@Valid表示对Taco对象进行校验,校验时机在绑定完表单数据,调用processDesign()之前.如果存在校验错误,则错误的细节将会捕捉到一个Errors对象中并传递给processDesign()
+    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors) {
+        System.out.println("Name: " + design.getName());
+        if (errors.hasErrors()) {
+            return "design";
+        }
         log.info("Processing design: " + design);
         //redirect:前缀:说明这是重定向视图,重定向到相对路径/orders/current
         return "redirect:/orders/current";

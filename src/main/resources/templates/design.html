@@ -51,6 +51,7 @@
     <div class="input-name">
         <h3>Name your taco creation:</h3>
         <input autocomplete="off" type="text" th:field="*{name}"/>
+        <span class="validationError" th:if="${#fields.hasErrors()}" th:errors="*{name}">name Error</span>
         <br/>
         <button>Submit your taco</button>
     </div>
