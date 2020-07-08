@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 //Spring Boot特殊测试注解,它会让这个测试在SpringMVC应用的上下文中执行(将输入的测试类型注册到SpringMVC中)
-@WebMvcTest(HomeController.class)
+@WebMvcTest()
 public class HomeControllerTest {
     @Autowired
     private MockMvc mockMvc;
