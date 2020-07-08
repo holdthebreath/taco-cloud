@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TacoCloudApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 //传递参数为1:配置类 2.命令行参数
-		SpringApplication.run(TacoCloudApplication.class, args);
-	}
+        SpringApplication.run(TacoCloudApplication.class, args);
+    }
 
 }
