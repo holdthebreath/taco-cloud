@@ -1,6 +1,7 @@
 package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.Ingredient;
 import tacos.Taco;
+import tacos.data.IngredientRepository;
 
 import javax.validation.Valid;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,21 +32,19 @@ import java.util.stream.Collectors;
 //指定控制器类处理等请求路径(处理路径以"/design"开头等请求)
 @RequestMapping("/design")
 public class DesignTacoController {
+
+    private final IngredientRepository ingredientRepository;
+
+    @Autowired
+    public DesignTacoController(IngredientRepository ingredientRepository){
+        this.ingredientRepository = ingredientRepository;
+    }
+
     //处理GET请求(Spring 4.3引入) = @RequestMapping(method = RequestMethod.GET)
     @GetMapping
     public String showDesignForm(Model model) {
-        List<Ingredient> ingredients = Arrays.asList(
-            new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
-            new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
-            new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN),
-            new Ingredient("CARN", "Carnitas", Ingredient.Type.PROTEIN),
-            new Ingredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIE),
-            new Ingredient("LETC", "Lettuce", Ingredient.Type.VEGGIE),
-            new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE),
-            new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE),
-            new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE),
-            new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE)
-        );
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepository.findAll().forEach(ingredients::add);
         Ingredient.Type[] types = Ingredient.Type.values();
         for (Ingredient.Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
