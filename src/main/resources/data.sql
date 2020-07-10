@@ -1,0 +1,35 @@
+delete
+from Taco_Order_Tacos;
+delete
+from Taco_Ingredients;
+delete
+from Taco;
+delete
+from Taco_Order;
+delete
+from Ingredient;
+
+insert into Ingredient(id, name, type)
+values ('FLTO', 'Flour Tortilla', 'WRAP');
+insert into Ingredient(id, name, type)
+values ('COTO', 'Corn Tortilla', 'WRAP');
+insert into Ingredient(id, name, type)
+values ('GRBF', 'Ground Beef', 'PROTEIN');
+insert into Ingredient(id, name, type)
+values ('CRAN', 'Carnitas', 'PROTEIN');
+insert into Ingredient(id, name, type)
+values ('TMTO', 'Diced Tomatoes', 'VEGGIE');
+insert into Ingredient(id, name, type)
+values ('LETC', 'Lettuce', 'VEGGIE');
+insert into Ingredient(id, name, type)
+values ('CHED', 'Cheddar', 'CHEESE');
+insert into Ingredient(id, name, type)
+values ('JACK', 'Monterrey Jack', 'CHEESE');
+insert into Ingredient(id, name, type)
+values ('SRCA', 'Salsa', 'SAUCE');
+insert into Ingredient(id, name, type)
+values ('SLSA', 'Sour Cream', 'SAUCE');
+
+
+
+

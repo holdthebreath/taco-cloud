@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @Date 2020/7/8 9:43 PM
  * @Version 1.0
  */
-//构造型注解
+//构造型注解,Spring组件扫描会发现，将其初始化为Spring应用上下文中的bean
 @Repository
 public class JdbcIngredientRepository implements IngredientRepository {
     private JdbcTemplate jdbc;
@@ -50,5 +50,6 @@ public class JdbcIngredientRepository implements IngredientRepository {
     public Ingredient save(Ingredient ingredient) {
 //        update()执行向数据库写入或更新数据的查询语句
         jdbc.update("insert into Ingredient (id, name, type) values(?, ?, ?)", ingredient.getId(), ingredient.getName(), ingredient.getType());
+        return ingredient;
     }
 }
