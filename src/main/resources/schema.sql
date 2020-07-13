@@ -34,7 +34,7 @@ create table if not exists Taco_Order
     ccNumber       varchar(16) not null,
     ccExpiration   varchar(5)  not null,
     ccCVV          varchar(3)  not null,
-    placeAt        timestamp   not null
+    placedAt       timestamp   not null
 );
 
 create table if not exists Taco_Order_Tacos
@@ -47,4 +47,3 @@ alter table Taco_Order_Tacos
     add foreign key (tacoOrder) references Taco_Order (id);
 alter table Taco_Order_Tacos
     add foreign key (taco) references Taco (id);
-
