@@ -80,9 +80,7 @@
 <!--		默认安全特性:-->
 <!--		1.所有的HTTP请求都需要认证-->
 <!--		2.不需要特定的角色和权限-->
-<!--		3.没有登录页面-->
-<!--		4.认证过程是通过HTTP basic认证对话框实现-->
-<!--		5.系统只有一个用户,用户名为user,密码随机生成并写入日志-->
+<!--		3.系统只有一个用户,用户名为user,密码随机生成并写入日志-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
