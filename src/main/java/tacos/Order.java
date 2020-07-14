@@ -30,7 +30,7 @@ import java.util.List;
 //指定实体应该持久化的表名字(Taco_Order)
 //可以在任何实体类上使用这个注解
 //如果不使用,则JPA将默认将实体持久化到一个名为Order的表中
-@Table("Taco_Order")
+@Table(name = "Taco_Order")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
