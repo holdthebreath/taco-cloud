@@ -25,6 +25,7 @@ import javax.persistence.Id;
 //因为必须设置final属性,所以还要将force属性设置为true,这将导致Lombok生成的构造函数将它们设置为null
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 //将类声明为JPA实体
+//Spring Data JPA根据实体类自动创建表(不关闭自动创建功能,关闭则调用scheme.sql和data.sql)
 @Entity
 public class Ingredient {
     //id属性必须使用@Id注解,以便将其指定为唯一标识
