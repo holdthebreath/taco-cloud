@@ -13,7 +13,7 @@
     <span style="color: red" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">Login failure information</span>
 </div>
 
-<p>New here? Click<a th:href="@{/register}">here</a> to register.</p>
+<p>New here? Click <a th:href="@{/register}">here</a> to register.</p>
 <!-- tag::thAction[] -->
 <form method="POST" th:action="@{/login}" id="loginForm">
     <!-- end::thAction[] -->
