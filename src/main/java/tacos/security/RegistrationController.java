@@ -20,18 +20,18 @@ public class RegistrationController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
-    public String registerForm(){
+    public String registerForm() {
         return "registration";
     }
 
     @PostMapping
-    public String processRegistration(RegistrationForm registrationForm){
+    public String processRegistration(RegistrationForm registrationForm) {
         userRepository.save(registrationForm.toUser(passwordEncoder));
         return "redirect:/login";
     }
