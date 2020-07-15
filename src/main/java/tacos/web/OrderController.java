@@ -1,15 +1,17 @@
 package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import tacos.Order;
+import tacos.User;
 import tacos.data.OrderRepository;
 
 import javax.validation.Valid;
@@ -33,15 +35,32 @@ public class OrderController {
     }
 
     @GetMapping("/current")
-    public String orderForm(Model model) {
+    public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
+        if (order.getDeliveryName() == null) {
+            order.setDeliveryName(user.getFullName());
+        }
+        if (order.getDeliveryStreet() == null) {
+            order.setDeliveryStreet(user.getStreet());
+        }
+        if (order.getDeliveryCity() == null) {
+            order.setDeliveryCity(user.getCity());
+        }
+        if (order.getDeliveryState() == null) {
+            order.setDeliveryState(user.getState());
+        }
+        if (order.getDeliveryZip() == null) {
+            order.setDeliveryZip(user.getZip());
+        }
         return "orderForm";
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
+    //@AuthenticationPrincipal = Authentication.getPrincipal(),获取登陆用户主体
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, @AuthenticationPrincipal User user) {
         if (errors.hasErrors()) {
             return "orderForm";
         }
+        order.setUser(user);
         orderRepository.save(order);
 //        重置session,清除原有的order对象
 //        只清除SessionAttributes注解里的参数，而不会应用于Session中的参数(session api手动放入:session.setAttribute("xxx", "yyy"))。
