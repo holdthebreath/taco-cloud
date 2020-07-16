@@ -1,7 +1,6 @@
 package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,23 +30,18 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
-//通过属性文件里taco.orders.pageSize设置值
-@ConfigurationProperties(prefix = "taco.orders")
 public class OrderController {
     private OrderRepository orderRepository;
-    private int pageSize = 20;
+    private OrderProps orderProps;
 
-    public void setPageSize(int pageSize){
-        this.pageSize = pageSize;
-    }
-
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderProps orderProps) {
         this.orderRepository = orderRepository;
+        this.orderProps = orderProps;
     }
 
     @GetMapping
     public String ordersForUser(@AuthenticationPrincipal User user, Model model){
-        Pageable pageable = PageRequest.of(0, pageSize);
+        Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
         model.addAttribute("orders", orderRepository.findByUserOrderByPlacedAtDesc(user, pageable));
         return "orderList";
     }
