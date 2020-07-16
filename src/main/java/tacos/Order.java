@@ -36,7 +36,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Date placeAt;
+    private Date placedAt;
     @NotBlank(message = "Name is required")
     private String deliveryName;
     @NotBlank(message = "Street is required")
@@ -65,6 +65,6 @@ public class Order implements Serializable {
 
     @PrePersist
     void placeAt() {
-        this.placeAt = new Date();
+        this.placedAt = new Date();
     }
 }

@@ -1,8 +1,10 @@
 package tacos.data;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import tacos.Order;
+import tacos.User;
 
 import java.util.List;
 
@@ -25,4 +27,6 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
     //nativeQuery = true开启原生sql语句查询
     @Query(value = "select '*' from Order where deliveryCity = 'LosAngeles'")
     List<Order> readOrdersDeliveredInLosAngeles();
+
+    List<Order> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
 }
