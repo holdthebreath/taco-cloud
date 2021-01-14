@@ -67,6 +67,7 @@ public class DesignTacoController {
     @GetMapping
     public String showDesignForm(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
+
         ingredientRepository.findAll().forEach(ingredients::add);
         Ingredient.Type[] types = Ingredient.Type.values();
         for (Ingredient.Type type : types) {
